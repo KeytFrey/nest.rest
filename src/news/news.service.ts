@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { INewsItemDto } from './create-news.dto';
+import { INewsItemDto } from './interfaces/newsItems';
 
 @Injectable()
 export class NewsService {
@@ -20,8 +20,8 @@ export class NewsService {
     });
   }
 
-  remove(id: string) {
-    throw new Error('Method not implemented.');
+  remove(id) {
+    return this.newsList.splice(id, 1);
   }
   update(id: string) {
     throw new Error('Method not implemented.');
