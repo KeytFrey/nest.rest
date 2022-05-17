@@ -1,0 +1,12 @@
+{
+  "svn.ignoreMissingSvnWarning": true,
+  "cSpell.words": [
+    "pinia"
+  ],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+}
