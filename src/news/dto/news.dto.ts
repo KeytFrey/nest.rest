@@ -1,11 +1,13 @@
-import { IsString } from 'class-validator';
-import { v4 as uuidv4 } from 'uuid';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class NewsDto {
   @IsString()
   title: string;
+
+  @IsOptional()
+  @IsString()
   description?: string;
 
-  @uuidv4()
+  @IsUUID(4)
   ownerId: string;
 }

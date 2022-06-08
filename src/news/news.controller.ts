@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -22,7 +24,15 @@ export class NewsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.newsService.findById(id);
+    const newsItem = this.newsService.findById(id);
+    if (newsItem === null) {
+      throw new HttpException(
+        'Новость с таким ID не найдена',
+        HttpStatus.NOT_FOUND,
+      );
+    } else {
+      return newsItem;
+    }
   }
 
   @Post()
@@ -32,11 +42,21 @@ export class NewsController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.newsService.remove(id);
+    const newsItemDel = this.newsService.delete(id);
+    if (newsItemDel === null) {
+      throw new HttpException('Нет такой новости', HttpStatus.NOT_FOUND);
+    } else {
+      return newsItemDel;
+    }
   }
 
   @Put(':id')
-  update(@Body() UpdateNewsDto: NewsDto, @Param('id') id: string) {
-    return this.newsService.update(id);
+  update(@Body() body: NewsDto, @Param('id') id: string) {
+    const newsItemUp = this.newsService.update(id, body);
+    if (newsItemUp === null) {
+      throw new HttpException('Нет такой новости', HttpStatus.NOT_FOUND);
+    } else {
+      return newsItemUp;
+    }
   }
 }
